@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Line Slicer — Neon Puzzle Action</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Outfit:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void: #05080f;
+            --deep: #0a1224;
+            --panel: rgba(8, 18, 40, 0.72);
+            --neon-cyan: #2ee8d8;
+            --neon-magenta: #ff3dac;
+            --neon-violet: #a78bfa;
+            --text: #e8f4ff;
+            --muted: rgba(232, 244, 255, 0.78);
+            --line: rgba(46, 232, 216, 0.28);
+        }
+
+        @keyframes orbitGlow {
+            0%, 100% { opacity: 0.55; transform: scale(1); }
+            50% { opacity: 0.95; transform: scale(1.03); }
+        }
+
+        @keyframes sliceSweep {
+            0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+            15% { opacity: 0.35; }
+            100% { transform: translateX(120%) skewX(-12deg); opacity: 0; }
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(46, 232, 216, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 61, 172, 0.12), transparent),
+                radial-gradient(ellipse 50% 45% at 0% 80%, rgba(167, 139, 250, 0.1), transparent),
+                linear-gradient(165deg, var(--void) 0%, var(--deep) 45%, #0f1a32 100%);
+            padding: 28px 16px 48px;
+            overflow-x: hidden;
+        }
+
+        .orbit-ring {
+            position: fixed;
+            inset: -40% -20%;
+            pointer-events: none;
+            border: 1px solid rgba(46, 232, 216, 0.06);
+            border-radius: 50%;
+            animation: orbitGlow 8s ease-in-out infinite;
+        }
+
+        .orbit-ring.r2 {
+            inset: -35% -15%;
+            border-color: rgba(255, 61, 172, 0.07);
+            animation-delay: -4s;
+        }
+
+        .slice-beam {
+            position: fixed;
+            top: 20%;
+            left: 0;
+            width: 40%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: sliceSweep 6s ease-in-out infinite;
+            pointer-events: none;
+            filter: blur(1px);
+        }
+
+        .shell {
+            position: relative;
+            width: min(880px, 100%);
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .hero {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 36px 26px 32px;
+            box-shadow:
+                0 0 0 1px rgba(46, 232, 216, 0.08),
+                0 24px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--void);
+            background: linear-gradient(100deg, var(--neon-cyan), #7af0e6);
+            border-radius: 4px;
+            padding: 8px 14px;
+        }
+
+        .version-hint {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.85rem, 6vw, 3.05rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+        }
+
+        .title-glow {
+            background: linear-gradient(105deg, #fff 0%, var(--neon-cyan) 40%, var(--neon-magenta) 95%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            margin-top: 16px;
+            font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+            font-weight: 500;
+            color: var(--muted);
+            max-width: 680px;
+            line-height: 1.7;
+        }
+
+        .cta-row {
+            margin-top: 26px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.06em;
+            border-radius: 8px;
+            padding: 14px 22px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn.primary {
+            color: var(--void);
+            background: linear-gradient(95deg, var(--neon-cyan), #5cf5e8);
+            box-shadow: 0 0 28px rgba(46, 232, 216, 0.35);
+        }
+
+        .btn.secondary {
+            color: var(--text);
+            border-color: var(--line);
+            background: rgba(46, 232, 216, 0.06);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .features {
+            margin-top: 28px;
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .feat {
+            border-radius: 16px;
+            border: 1px solid rgba(255, 61, 172, 0.15);
+            background: linear-gradient(145deg, rgba(10, 24, 48, 0.85), rgba(5, 12, 28, 0.65));
+            padding: 20px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
+            opacity: 0.6;
+        }
+
+        .feat h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+            color: var(--neon-violet);
+            margin-bottom: 10px;
+        }
+
+        .feat p,
+        .feat li {
+            color: var(--muted);
+            line-height: 1.62;
+            font-size: 0.96rem;
+        }
+
+        .feat ul {
+            margin-top: 8px;
+            padding-left: 1.1em;
+        }
+
+        .feat li {
+            margin-bottom: 6px;
+        }
+
+        .strip {
+            margin-top: 26px;
+            padding: 18px 20px;
+            border-radius: 14px;
+            border: 1px dashed rgba(46, 232, 216, 0.35);
+            background: rgba(46, 232, 216, 0.04);
+        }
+
+        .strip p {
+            font-size: 0.98rem;
+            color: var(--muted);
+            line-height: 1.65;
+            text-align: center;
+        }
+
+        .strip strong {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .foot {
+            margin-top: 22px;
+            text-align: center;
+        }
+
+        .foot a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--neon-magenta);
+            text-decoration: none;
+        }
+
+        .foot a:hover {
+            color: #ff7ec8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orbit-ring" aria-hidden="true"></div>
+    <div class="orbit-ring r2" aria-hidden="true"></div>
+    <div class="slice-beam" aria-hidden="true"></div>
+
+    <main class="shell">
+        <section class="hero">
+            <div class="brand-row">
+                <span class="badge">App Store</span>
+                <span class="version-hint">iPhone · iPad · iOS 15+</span>
+            </div>
+            <h1><span class="title-glow">Orbit Line Slicer</span></h1>
+            <p class="tagline">
+                Slice glowing paths, beat the clock, dodge traps, and master every sequence. Orbit Line Slicer is a fast hypercasual puzzle where timing, memory, and reflexes collide—draw neon lines through orbiting targets in the right order while the scene keeps changing under you.
+            </p>
+
+            <div class="cta-row">
+                <a class="btn primary" href="https://apps.apple.com/us/app/orbit-line-slicer/id6764528098?uo=4" target="_blank" rel="noopener noreferrer">Get on the App Store</a>
+                <a class="btn secondary" href="privacy.html">Privacy overview</a>
+            </div>
+
+            <div class="features">
+                <article class="feat">
+                    <h2>Slice &amp; sequence</h2>
+                    <p>Trace bright paths to cut orbiting targets in the correct order. One wrong move can cost the round—stay sharp.</p>
+                </article>
+                <article class="feat">
+                    <h2>Traps &amp; twists</h2>
+                    <p>Decoys, disappearing pins, and rotating scenes test focus. Expect new mechanics as levels evolve.</p>
+                </article>
+                <article class="feat">
+                    <h2>Boosters</h2>
+                    <p>Use power-ups to slow time and steady the action when the pace spikes.</p>
+                </article>
+            </div>
+
+            <div class="strip">
+                <p><strong>Why play:</strong> crisp neon art, tactile slicing feedback, and short rounds built for one-handed sessions—puzzle thinking with an arcade pulse.</p>
+            </div>
+
+            <p class="foot"><a href="privacy.html">Privacy</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

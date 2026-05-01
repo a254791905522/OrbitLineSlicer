@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy — Orbit Line Slicer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Outfit:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void: #05080f;
+            --deep: #0a1224;
+            --ink: #e8f4ff;
+            --dim: rgba(232, 244, 255, 0.76);
+            --cyan: #2ee8d8;
+            --magenta: #ff3dac;
+            --rule: rgba(46, 232, 216, 0.22);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse 70% 45% at 20% 0%, rgba(255, 61, 172, 0.1), transparent),
+                radial-gradient(ellipse 55% 40% at 90% 100%, rgba(46, 232, 216, 0.08), transparent),
+                linear-gradient(170deg, var(--void), var(--deep) 55%, #0c1628);
+            padding: 32px 16px 52px;
+        }
+
+        .page {
+            width: min(640px, 100%);
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 28px;
+            margin-bottom: 8px;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent) 1;
+        }
+
+        .eyebrow {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.5rem, 4.2vw, 2rem);
+            line-height: 1.15;
+            background: linear-gradient(95deg, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .meta {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: var(--dim);
+        }
+
+        dl.doc {
+            margin-top: 28px;
+        }
+
+        .doc dt {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--magenta);
+            margin-top: 26px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .doc dt:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .doc dd {
+            margin-top: 10px;
+            color: var(--dim);
+            line-height: 1.72;
+            font-size: 1rem;
+        }
+
+        .doc dd p + p {
+            margin-top: 12px;
+        }
+
+        .pill-note {
+            margin-top: 32px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            border-left: 4px solid var(--cyan);
+            background: rgba(46, 232, 216, 0.06);
+            color: var(--dim);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        .pill-note em {
+            color: var(--ink);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        nav.end {
+            margin-top: 36px;
+            text-align: center;
+        }
+
+        nav.end a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(46, 232, 216, 0.4);
+            padding-bottom: 2px;
+        }
+
+        nav.end a:hover {
+            color: #7af0e6;
+            border-bottom-color: #7af0e6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header>
+            <p class="eyebrow">Orbit Line Slicer</p>
+            <h1>Privacy Statement</h1>
+            <p class="meta">Last updated: May 1, 2026 · Applies to the mobile game Orbit Line Slicer distributed on the App Store.</p>
+        </header>
+
+        <dl class="doc">
+            <dt>Summary</dt>
+            <dd>
+                <p>This statement describes how Orbit Line Slicer treats information in plain terms. It is not legal advice. For distribution-level disclosures that may vary by app version or region, refer to the privacy labels and details shown on the App Store listing at the time you install or update the game.</p>
+            </dd>
+
+            <dt>Collection</dt>
+            <dd>
+                <p>The app is built so that routine gameplay does not rely on you submitting contact details, biographies, or similar identifiers inside the game itself.</p>
+                <p>According to information presented on the App Store for this title, the developer indicates that <em>no data is collected from this app</em> in the sense described in Apple’s app privacy questionnaire. If Apple’s listing or your device shows different details after an update, those store-facing disclosures take precedence for that release.</p>
+            </dd>
+
+            <dt>Your device</dt>
+            <dd>
+                <p>Like most games, Orbit Line Slicer may read and write data locally on your device—such as progress, settings, or temporary session state—so levels and preferences work offline and across launches. That storage stays on the device unless you use platform features (for example, iCloud backup) configured outside the game.</p>
+            </dd>
+
+            <dt>Apple &amp; ads</dt>
+            <dd>
+                <p>Installation, billing, updates, and optional App Store features are governed by Apple’s terms and your Apple ID settings. If the game displays advertisements, delivery and any related measurement are handled by the ad networks and frameworks integrated in that build, subject to system-level privacy controls you manage on your device.</p>
+            </dd>
+
+            <dt>Children</dt>
+            <dd>
+                <p>The game is rated for general audiences. Parents and guardians should use Screen Time, Ask to Buy, and other iOS controls where appropriate.</p>
+            </dd>
+
+            <dt>Changes</dt>
+            <dd>
+                <p>This page may be revised when the game or platform requirements change. The “Last updated” line reflects the latest revision of this standalone summary.</p>
+            </dd>
+        </dl>
+
+        <p class="pill-note">
+            <em>Note:</em> This document is a player-facing overview only. It does not list email addresses, physical addresses, or third-party marketing sites. For the authoritative privacy labels attached to the shipped binary, always check the App Store product page for Orbit Line Slicer.
+        </p>
+
+        <nav class="end">
+            <a href="index.html">← Back to game overview</a>
+        </nav>
+    </div>
+</body>
+
+</html>
